@@ -1,4 +1,6 @@
-import { box, children } from "../app.js";
+import {
+  root, dropdown, box, children,
+} from '../app.js';
 
 const filterFun = (index) => {
   const filter = children.filter((e, i) => children[i] !== children[index]);

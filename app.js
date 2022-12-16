@@ -1,8 +1,8 @@
-import { filterFun, switchEnter } from "./helpers/helpers.js";
+import { filterFun, switchEnter } from './helpers/helpers.js';
 
-const root = document.getElementById('root');
+export const root = document.getElementById('root');
 export const box = document.querySelector('.box');
-const dropdown = document.getElementById('dropdown');
+export const dropdown = document.getElementById('dropdown');
 dropdown.style.display = 'none';
 export const children = Array.from(dropdown.children);
 let active = -1;
@@ -63,12 +63,9 @@ box.addEventListener('keydown', (e) => {
       }
     }
     const results = words.join(' ');
-    console.log(words);
-    console.log(results);
     const div = document.createElement('div');
     div.innerHTML += results;
     div.contentEditable = 'true';
-    console.log(div);
     root.appendChild(div);
     box.innerHTML = '';
   }
