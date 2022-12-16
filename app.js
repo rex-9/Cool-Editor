@@ -1,7 +1,7 @@
 import { filterFun, switchEnter } from './helpers/helpers.js';
 
 export const root = document.getElementById('root');
-export const editors = document.querySelectorAll('[content-editable="true"]');
+const editors = document.querySelectorAll('[contenteditable="true"]');
 export const dropdown = document.getElementById('dropdown');
 export const active = document.querySelector('.active');
 dropdown.style.display = 'none';
@@ -9,7 +9,11 @@ export const children = Array.from(dropdown.children);
 let focus = -1;
 
 editors.forEach((e) => {
-  e === document.activeElement ? e.classList.add('active') : e.classList.remove('active');
+  e.addEventListener('mousedown', () => {
+    e.classList.add('active');
+    console.log("mouse down");
+  })
+  //  === document.activeElement ? e.classList.add('active') : e.classList.remove('active');
 });
 
 console.log(editors);
