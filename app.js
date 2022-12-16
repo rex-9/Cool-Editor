@@ -1,5 +1,3 @@
-//hello vercel
-
 const root = document.getElementById('root');
 const box = document.querySelector('.box');
 const dropdown = document.getElementById('dropdown');
