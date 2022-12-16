@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,22 @@
   <link href="style.css" rel="stylesheet" type="text/css">
   <script src="app.js" defer></script>
 </head>
+
 <body>
   <section>
     <h1>Cool Editor</h1>
-    <p></p>
-    <textarea name="editor" id="editor" cols="30" rows="10" placeholder="Type anything you want here..."></textarea>
+    <div id="root">
+    </div>
+    <p class="box" contenteditable="true"></p>
+    <div id="dropdown">
+      <p tabindex="0">Heading 1</p>
+      <p tabindex="0">Heading 2</p>
+      <p tabindex="0">Heading 3</p>
+      <p tabindex="0">Heading 4</p>
+      <p tabindex="0">Heading 5</p>
+      <p tabindex="0">Heading 6</p>
+    </div>
   </section>
 </body>
+
 </html>
