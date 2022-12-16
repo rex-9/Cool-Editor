@@ -8,6 +8,30 @@ const createEl = (tag, text, placeholder) => {
   el.contentEditable = 'true';
   el.setAttribute('placeholder', placeholder);
   el.addEventListener('keydown', (e) => initiate(e));
+  el.addEventListener('mousedown', (e) => {
+    switch (tag) {
+      case 'h1':
+        el.innerHTML = '/1' + text;
+        break;
+      case 'h2':
+        el.innerHTML = '/2' + text;
+        break;
+      case 'h3':
+        el.innerHTML = '/3' + text;
+        break;
+      case 'h4':
+        el.innerHTML = '/4' + text;
+        break;
+      case 'h5':
+        el.innerHTML = '/5' + text;
+        break;
+      case 'h6':
+        el.innerHTML = '/6' + text;
+        break;
+      default:
+        break;
+    }
+  });
   return el;
 };
 
@@ -57,7 +81,6 @@ const initiate = (e) => {
   } else if (e.key === "Backspace") {
     e.target.innerHTML === '' && root.children.length > 1 && root.removeChild(e.target)
     root.children[root.children.length - 1].classList.add('active');
-    root.children[root.children.length - 1].focus();
   }
 };
 
