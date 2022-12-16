@@ -71,6 +71,7 @@ const initiate = (e) => {
         break;
     }
     root.replaceChild(word, e.target);
+    root.children[root.children.length - 1].focus();
     const last = root.children[root.children.length - 1];
     let decision = e.target.innerHTML;
     const cmd = e.target.innerHTML.substring(0, 2);
