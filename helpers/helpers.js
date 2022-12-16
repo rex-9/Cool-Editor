@@ -11,12 +11,18 @@ const filterFun = (index) => {
 };
 
 const enterFun = (tag, text) => {
-  const element = document.createElement(tag);
-  element.contentEditable = 'true';
-  element.innerHTML = text;
-  root.appendChild(element);
+  const el = document.createElement(tag);
+  el.contentEditable = 'true';
+  el.innerHTML = text;
+  el.setAttribute('placeholder', tag);
+  root.appendChild(el);
   dropdown.style.display = 'none';
   active.innerHTML = '';
+  el.addEventListener('keydown', (e) => {
+    if (e.key === "Backspace" && el.innerHTML === "") {
+      root.removeChild(el);
+    }
+  });
 };
 
 const switchEnter = (key) => {
@@ -54,6 +60,8 @@ const createEl = (tag, word) => {
   const el = document.createElement(tag);
   el.innerHTML = word;
   el.contentEditable = 'true';
+  el.setAttribute('placeholder', tag);
+  console.log(el);
   return el;
 };
 

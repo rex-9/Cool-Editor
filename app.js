@@ -34,19 +34,6 @@ active.addEventListener('keydown', (e) => {
         default:
           break;
       }
-      if (event.key === '1') {
-        filterFun(0);
-      } else if (event.key === '2') {
-        filterFun(1);
-      } else if (event.key === '3') {
-        filterFun(2);
-      } else if (event.key === '4') {
-        filterFun(3);
-      } else if (event.key === '5') {
-        filterFun(4);
-      } else if (event.key === '6') {
-        filterFun(5);
-      }
     });
   } else if (e.key === 'Backspace') {
     dropdown.style.display = 'none';
@@ -58,36 +45,35 @@ active.addEventListener('keydown', (e) => {
       case '/1':
         word = createEl('h1', word.substring(3));
         break;
-
       case '/2':
         word = createEl('h2', word.substring(3));
         break;
-
       case '/3':
         word = createEl('h3', word.substring(3));
         break;
-
       case '/4':
         word = createEl('h4', word.substring(3));
         break;
-
       case '/5':
         word = createEl('h5', word.substring(3));
         break;
-
       case '/6':
         word = createEl('h6', word.substring(3));
         break;
-
       default:
         word = createEl('p', word);
         break;
     }
     root.appendChild(word);
-    // word.addEventListener('focus', () => {
-    //   active.classList.remove('active');
-    //   word.classList.add('active');
-    // });
+    word.addEventListener('mousedown', () => {
+      active.classList.remove('active');
+      word.classList.add('active');
+    });
+    word.addEventListener('keydown', (e) => {
+      if (e.key === "Backspace" && word.innerHTML === "") {
+        root.removeChild(word);
+      }
+    });
     active.innerHTML = '';
     dropdown.style.display = 'none';
   }
