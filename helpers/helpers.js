@@ -50,4 +50,11 @@ const switchEnter = (key) => {
   }
 };
 
-export { filterFun, switchEnter };
+const createEl = (tag, word) => {
+  const el = document.createElement(tag);
+  el.innerHTML = word;
+  el.contentEditable = 'true';
+  return el;
+};
+
+export { filterFun, switchEnter, createEl };

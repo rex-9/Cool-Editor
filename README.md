@@ -64,7 +64,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone https://github.com/rex-9/Cool-Editor.git
+  git clone https://github.com/rex-9/CoolEditor.git
 ```
 
 ### Install
@@ -72,7 +72,7 @@ Clone this repository to your desired folder:
 #### 1. Navigate to the location of the folder in your machine:
 
 ```
-you@your-Pc-name:~$ cd <Cool-Editor>
+you@your-Pc-name:~$ cd <CoolEditor>
 ```
 
 #### 2. Install the node packages:

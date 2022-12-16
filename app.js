@@ -1,28 +1,39 @@
-import { filterFun, switchEnter } from './helpers/helpers.js';
+import { filterFun, switchEnter, createEl } from './helpers/helpers.js';
 
 export const root = document.getElementById('root');
-const editors = document.querySelectorAll('[contenteditable="true"]');
 export const dropdown = document.getElementById('dropdown');
 export const active = document.querySelector('.active');
 dropdown.style.display = 'none';
 export const children = Array.from(dropdown.children);
 let focus = -1;
 
-editors.forEach((e) => {
-  e.addEventListener('mousedown', () => {
-    e.classList.add('active');
-    console.log("mouse down");
-  })
-  //  === document.activeElement ? e.classList.add('active') : e.classList.remove('active');
-});
-
-console.log(editors);
-
 active.addEventListener('keydown', (e) => {
   if (e.key === '/') {
     dropdown.style.display = 'block';
     children.forEach((child) => { child.style.display = 'block'; });
     active.addEventListener('keypress', (event) => {
+      switch (event.key) {
+        case '1':
+          filterFun(0);
+          break;
+        case '2':
+          filterFun(1);
+          break;
+        case '3':
+          filterFun(2);
+          break;
+        case '4':
+          filterFun(3);
+          break;
+        case '5':
+          filterFun(4);
+          break;
+        case '6':
+          filterFun(5);
+          break;
+        default:
+          break;
+      }
       if (event.key === '1') {
         filterFun(0);
       } else if (event.key === '2') {
@@ -41,44 +52,44 @@ active.addEventListener('keydown', (e) => {
     dropdown.style.display = 'none';
   } else if (e.key === 'Enter') {
     e.preventDefault();
-    const words = active.innerHTML.split(' ');
-    for (let i = 0; i < words.length; i += 1) {
-      const keywords = words[i].substring(0, 2);
-      switch (keywords) {
-        case '/1':
-          words[i] = `<h1>${words[i].substring(2) || 'Heading 1'}</h1>`;
-          break;
+    let word = active.innerHTML;
+    const keywords = word.substring(0, 2);
+    switch (keywords) {
+      case '/1':
+        word = createEl('h1', word.substring(3));
+        break;
 
-        case '/2':
-          words[i] = `<h2>${words[i].substring(2) || 'Heading 2'}</h2>`;
-          break;
+      case '/2':
+        word = createEl('h2', word.substring(3));
+        break;
 
-        case '/3':
-          words[i] = `<h3px;">${words[i].substring(2) || 'Heading 3'}</h3>`;
-          break;
+      case '/3':
+        word = createEl('h3', word.substring(3));
+        break;
 
-        case '/4':
-          words[i] = `<h4>${words[i].substring(2) || 'Heading 4'}</h4>`;
-          break;
+      case '/4':
+        word = createEl('h4', word.substring(3));
+        break;
 
-        case '/5':
-          words[i] = `<h5>${words[i].substring(2) || 'Heading 5'}</h5>`;
-          break;
+      case '/5':
+        word = createEl('h5', word.substring(3));
+        break;
 
-        case '/6':
-          words[i] = `<h6>${words[i].substring(2) || 'Heading 6'}</h6>`;
-          break;
+      case '/6':
+        word = createEl('h6', word.substring(3));
+        break;
 
-        default:
-          break;
-      }
+      default:
+        word = createEl('p', word);
+        break;
     }
-    const results = words.join(' ');
-    const div = document.createElement('div');
-    div.innerHTML += results;
-    div.contentEditable = 'true';
-    root.appendChild(div);
+    root.appendChild(word);
+    // word.addEventListener('focus', () => {
+    //   active.classList.remove('active');
+    //   word.classList.add('active');
+    // });
     active.innerHTML = '';
+    dropdown.style.display = 'none';
   }
 });
 
