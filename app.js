@@ -1,153 +1,56 @@
-import {
-  // filterFun,
-  // switchEnter,
-  createEl,
-  // condition
-} from './helpers/helpers.js';
+const root = document.getElementById('root');
+let active = document.querySelector('.active');
+active.focus();
 
-export const root = document.getElementById('root');
-// export const dropdown = document.getElementById('dropdown');
-export let active = document.querySelector('.active');
-// dropdown.style.display = 'none';
-// export const children = Array.from(dropdown.children);
-// let focus = -1;
-
-export const initiate = (e) => {
-  // if (e.key === '/') {
-    // dropdown.style.display = 'block';
-    // children.forEach((child) => { child.style.display = 'block'; });
-    // active.addEventListener('keypress', (event) => {
-    //   switch (event.key) {
-    //     case '1':
-    //       filterFun(0);
-    //       break;
-    //     case '2':
-    //       filterFun(1);
-    //       break;
-    //     case '3':
-    //       filterFun(2);
-    //       break;
-    //     case '4':
-    //       filterFun(3);
-    //       break;
-    //     case '5':
-    //       filterFun(4);
-    //       break;
-    //     case '6':
-    //       filterFun(5);
-    //       break;
-    //   }
-    // });
-  // }
-  // else if (e.key === 'Backspace') {
-  //   dropdown.style.display = 'none';
-  // }
-  // else
+const initiate = (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    let word = active.innerHTML;
+    let word = e.target.innerHTML;
     const keywords = word.substring(0, 2);
     switch (keywords) {
       case '/1':
-        word = createEl('h1', word.substring(2));
+        word = createEl('h1', word.substring(2), 'Heading 1');
         break;
       case '/2':
-        word = createEl('h2', word.substring(2));
+        word = createEl('h2', word.substring(2), 'Heading 2');
         break;
       case '/3':
-        word = createEl('h3', word.substring(2));
+        word = createEl('h3', word.substring(2), 'Heading 3');
         break;
       case '/4':
-        word = createEl('h4', word.substring(2));
+        word = createEl('h4', word.substring(2), 'Heading 4');
         break;
       case '/5':
-        word = createEl('h5', word.substring(2));
+        word = createEl('h5', word.substring(2), 'Heading 5');
         break;
       case '/6':
-        word = createEl('h6', word.substring(2));
+        word = createEl('h6', word.substring(2), 'Heading 6');
         break;
       default:
-        word = createEl('p', word);
+        word = createEl('p', word, 'Paragraph Tag');
         break;
     }
-    const lastChild = root.children[root.children.length - 1];
-    if (lastChild.classList.contains('active')) {
-      root.replaceChild(word, root.querySelector('.active'));
-      const newEl = document.createElement('p')
-      newEl.contentEditable = 'true';
-      newEl.setAttribute('placeholder', 'Type / to see commands...');
-      active.classList.remove('active');
-      newEl.classList.add('active');
-      root.appendChild(newEl);
-      newEl.addEventListener('mousedown', () => {
-        newEl.classList.add('active');
-        document.querySelector('.active').addEventListener('keydown', (e) => initiate(e));
-      });
-      newEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && newEl.innerHTML === '') {
-          root.removeChild(newEl);
-        }
-      });
-    } else {
-      root.replaceChild(word, root.querySelector('.active'));
-      lastChild.classList.add('active');
-    }
-    word.addEventListener('mousedown', () => {
-      active.classList.remove('active');
-      word.classList.add('active');
-      active = document.querySelector('.active');
-      active.addEventListener('keydown', (e) => initiate(e));
-    });
-    word.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && word.innerHTML === '') {
-        root.removeChild(word);
-      }
-    });
-    active.innerHTML = '';
-    // dropdown.style.display = 'none';
+    root.replaceChild(word, e.target);
+    const last = root.children[root.children.length - 1];
+    e.target.innerHTML === last.innerHTML && newInput();
+    root.lastChild.focus();
   }
 };
 
+const createEl = (tag, text, placeholder) => {
+  const el = document.createElement(tag);
+  el.innerHTML = text;
+  el.contentEditable = 'true';
+  el.setAttribute('placeholder', placeholder);
+  el.addEventListener('keydown', (e) => initiate(e));
+  return el;
+};
+
+const newInput = () => {
+  const newEle = createEl('p', '', 'Type / to see the commands');
+  newEle.classList.add('active');
+  root.appendChild(newEle);
+  newEle.focus();
+};
+
 active.addEventListener('keydown', (e) => initiate(e));
-document.addEventListener('mousedown', (e) => {
-  const last = root.children[root.children.length - 1];
-  if (e.target !== last) {
-    last.classList.remove('active');
-  } else {
-    const pre = Array.from(root.children).filter(child => child !== last);
-    pre.forEach((child) => child.classList.remove('active'));
-  }
-});
-
-// document.addEventListener('keydown', (e) => {
-//   const blocks = children.filter((child) => child.style.display === 'block');
-//   if (e.key === 'ArrowDown') {
-//     e.preventDefault();
-//     if (blocks.length === 1) {
-//       blocks[0].focus();
-//     } else if (focus < blocks.length - 1) {
-//       focus += 1;
-//       const option = blocks[focus];
-//       option.focus();
-//     }
-//   } else if (e.key === 'ArrowUp') {
-//     e.preventDefault();
-//     if (blocks.length === 1) {
-//       blocks[0].focus();
-//     } else if (focus > 0) {
-//       focus -= 1;
-//       const option = blocks[focus];
-//       option.focus();
-//     }
-//   }
-// });
-
-// children.forEach((child) => {
-//   child.addEventListener('click', () => switchEnter(child.innerHTML));
-//   child.addEventListener('keydown', (event) => {
-//     event.preventDefault();
-//     if (event.key === 'Enter') {
-//       switchEnter(child.innerHTML);
-//     }
-//   });
-// });
