@@ -1,17 +1,24 @@
 import { filterFun, switchEnter } from './helpers/helpers.js';
 
 export const root = document.getElementById('root');
-export const box = document.querySelector('.box');
+export const editors = document.querySelectorAll('[content-editable="true"]');
 export const dropdown = document.getElementById('dropdown');
+export const active = document.querySelector('.active');
 dropdown.style.display = 'none';
 export const children = Array.from(dropdown.children);
-let active = -1;
+let focus = -1;
 
-box.addEventListener('keydown', (e) => {
+editors.forEach((e) => {
+  e === document.activeElement ? e.classList.add('active') : e.classList.remove('active');
+});
+
+console.log(editors);
+
+active.addEventListener('keydown', (e) => {
   if (e.key === '/') {
     dropdown.style.display = 'block';
     children.forEach((child) => { child.style.display = 'block'; });
-    box.addEventListener('keypress', (event) => {
+    active.addEventListener('keypress', (event) => {
       if (event.key === '1') {
         filterFun(0);
       } else if (event.key === '2') {
@@ -30,7 +37,7 @@ box.addEventListener('keydown', (e) => {
     dropdown.style.display = 'none';
   } else if (e.key === 'Enter') {
     e.preventDefault();
-    const words = box.innerHTML.split(' ');
+    const words = active.innerHTML.split(' ');
     for (let i = 0; i < words.length; i += 1) {
       const keywords = words[i].substring(0, 2);
       switch (keywords) {
@@ -67,7 +74,7 @@ box.addEventListener('keydown', (e) => {
     div.innerHTML += results;
     div.contentEditable = 'true';
     root.appendChild(div);
-    box.innerHTML = '';
+    active.innerHTML = '';
   }
 });
 
@@ -77,18 +84,18 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     if (blocks.length === 1) {
       blocks[0].focus();
-    } else if (active < blocks.length - 1) {
-      active += 1;
-      const option = blocks[active];
+    } else if (focus < blocks.length - 1) {
+      focus += 1;
+      const option = blocks[focus];
       option.focus();
     }
   } else if (e.key === 'ArrowUp') {
     e.preventDefault();
     if (blocks.length === 1) {
       blocks[0].focus();
-    } else if (active > 0) {
-      active -= 1;
-      const option = blocks[active];
+    } else if (focus > 0) {
+      focus -= 1;
+      const option = blocks[focus];
       option.focus();
     }
   }
@@ -100,7 +107,6 @@ children.forEach((child) => {
     event.preventDefault();
     if (event.key === 'Enter') {
       switchEnter(child.innerHTML);
-      dropdown.classList.add('hide');
     }
   });
 });

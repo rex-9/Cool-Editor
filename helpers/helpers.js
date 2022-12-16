@@ -1,5 +1,5 @@
 import {
-  root, dropdown, box, children,
+  root, dropdown, active, children,
 } from '../app.js';
 
 const filterFun = (index) => {
@@ -16,7 +16,7 @@ const enterFun = (tag, text) => {
   element.innerHTML = text;
   root.appendChild(element);
   dropdown.style.display = 'none';
-  box.innerHTML = '';
+  active.innerHTML = '';
 };
 
 const switchEnter = (key) => {
