@@ -54,6 +54,10 @@ const initiate = (e) => {
       decision = e.target.innerHTML.substring(2);
     }
     decision === last.innerHTML && newInput();
+  } else if (e.key === "Backspace") {
+    e.target.innerHTML === '' && root.children.length > 1 && root.removeChild(e.target)
+    root.children[root.children.length - 1].classList.add('active');
+    root.children[root.children.length - 1].focus();
   }
 };
 
