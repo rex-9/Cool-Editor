@@ -49,7 +49,8 @@ const initiate = (e) => {
     root.replaceChild(word, e.target);
     const last = root.children[root.children.length - 1];
     let decision = e.target.innerHTML;
-    if (e.target.innerHTML.substring(0, 1) === '/') {
+    const cmd = e.target.innerHTML.substring(0, 2);
+    if (cmd === '/1' || cmd === '/2' || cmd === '/3' || cmd === '/4' || cmd === '/5' || cmd === '/6') {
       decision = e.target.innerHTML.substring(2);
     }
     decision === last.innerHTML && newInput();
