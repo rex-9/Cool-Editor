@@ -70,7 +70,7 @@ active.addEventListener('keydown', (e) => {
       word.classList.add('active');
     });
     word.addEventListener('keydown', (e) => {
-      if (e.key === "Backspace" && word.innerHTML === "") {
+      if (e.key === 'Backspace' && word.innerHTML === '') {
         root.removeChild(word);
       }
     });

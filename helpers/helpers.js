@@ -19,7 +19,7 @@ const enterFun = (tag, text) => {
   dropdown.style.display = 'none';
   active.innerHTML = '';
   el.addEventListener('keydown', (e) => {
-    if (e.key === "Backspace" && el.innerHTML === "") {
+    if (e.key === 'Backspace' && el.innerHTML === '') {
       root.removeChild(el);
     }
   });
@@ -61,7 +61,6 @@ const createEl = (tag, word) => {
   el.innerHTML = word;
   el.contentEditable = 'true';
   el.setAttribute('placeholder', tag);
-  console.log(el);
   return el;
 };
 
