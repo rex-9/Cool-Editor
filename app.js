@@ -36,7 +36,7 @@ const createEl = (tag, text, placeholder) => {
 };
 
 const newInput = () => {
-  const newEle = createEl('p', '', 'Type / to see the commands');
+  const newEle = createEl('p', '', 'Type /1 to /6 for heading or just type to create a paragraph');
   newEle.classList.add('active');
   root.appendChild(newEle);
   newEle.focus();
