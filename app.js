@@ -1,6 +1,22 @@
 const root = document.getElementById('root');
-let active = document.querySelector('.active');
+const active = document.querySelector('.active');
 active.focus();
+
+const createEl = (tag, text, placeholder) => {
+  const el = document.createElement(tag);
+  el.innerHTML = text;
+  el.contentEditable = 'true';
+  el.setAttribute('placeholder', placeholder);
+  el.addEventListener('keydown', (e) => initiate(e));
+  return el;
+};
+
+const newInput = () => {
+  const newEle = createEl('p', '', 'Type / to see the commands');
+  newEle.classList.add('active');
+  root.appendChild(newEle);
+  newEle.focus();
+};
 
 const initiate = (e) => {
   if (e.key === 'Enter') {
@@ -32,25 +48,12 @@ const initiate = (e) => {
     }
     root.replaceChild(word, e.target);
     const last = root.children[root.children.length - 1];
-    e.target.innerHTML === last.innerHTML && newInput();
-    root.lastChild.focus();
+    let decision = e.target.innerHTML;
+    if (e.target.innerHTML.substring(0, 1) === '/') {
+      decision = e.target.innerHTML.substring(2);
+    }
+    decision === last.innerHTML && newInput();
   }
-};
-
-const createEl = (tag, text, placeholder) => {
-  const el = document.createElement(tag);
-  el.innerHTML = text;
-  el.contentEditable = 'true';
-  el.setAttribute('placeholder', placeholder);
-  el.addEventListener('keydown', (e) => initiate(e));
-  return el;
-};
-
-const newInput = () => {
-  const newEle = createEl('p', '', 'Type / to see the commands');
-  newEle.classList.add('active');
-  root.appendChild(newEle);
-  newEle.focus();
 };
 
 active.addEventListener('keydown', (e) => initiate(e));
